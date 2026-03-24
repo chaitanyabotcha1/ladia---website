@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ladia Jewellery</title>
+    <style>
+        body { font-family: Arial; margin:0; background-color: #f0f0f5; scroll-behavior: smooth; }
+        
+        .navbar {
+            position: sticky;
+            top:0;
+            background-color: black;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            z-index: 100;
+        }
+        .navbar .brand { font-weight:bold; font-size:18px; }
+        .navbar .links { flex:1; text-align:center; }
+        .navbar .links a {
+            color:white;
+            margin: 0 15px;
+            text-decoration:none;
+            cursor:pointer;
+        }
+	.header {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(to right, #f0f0f5, #f0f0f5);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    
+	}
+
+	.header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    color: #8B008B; 
+    margin-bottom: 10px;
+    font-family: 'Georgia', serif;
+	}
+
+	.header p {
+    font-size: 20px;
+    color: #4B0082; 
+    font-style: italic;
+    margin: 5px 0;
+	}
+
+	.header hr {
+    border: 2px solid gold;
+    width: 80px;
+    margin: 15px auto;
+	}
+
+                .products { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; padding-bottom:50px; }
+        .card {
+            background:white; padding:15px; border-radius:10px;
+            width:200px; text-align:center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .card img {
+            width:150px; height:150px;
+            object-fit:cover; margin-bottom:10px;
+            border-radius:8px;
+        }
+
+        button.addCart {
+            background:gold; border:none;
+            padding:10px; cursor:pointer;
+            border-radius:5px;
+        }
+        button.addCart:hover { background:#e6c200; }
+
+        #message { text-align:center; color:green; font-weight:bold; margin-top:10px; }
+
+        .filter-section { text-align:center; margin:20px 0; }
+        select { padding:8px; margin:0 10px; }
+
+        .contact {
+            background:#fcfcfc; padding:20px;
+            margin:50px auto; width:80%;
+            border-radius:10px;
+            box-shadow:0 2px 5px rgba(0,0,0,0.2);
+            text-align:center;
+        }
+	.reviews {
+    	  background:#fcfcfc;
+    	  padding:30px;
+    	  margin:40px auto;
+    	  width:80%;
+    	  border-radius:10px;
+    	  box-shadow:0 2px 5px rgba(0,0,0,0.2);
+    	  text-align:center;
+	}
+	.review-card {
+    	background:#f9f9f9;
+   	padding:15px;
+    	border-radius:8px;
+    	width:250px;
+	}
+	.stars {
+    	color:gold;
+    	font-size:18px;
+    	margin-bottom:5px;
+	}
+
+	.review-card p {
+    	font-style:italic;
+	}
+
+	.review-card h4 {
+    	margin-top:10px;
+    	color:gray;
+	}
+	.review-container {
+    	display:flex;
+    	flex-wrap:wrap;
+    	justify-content:center;
+    	gap:20px;
+	}
+	.about {
+    	    background:#fcfcfc;
+    	    padding:30px;
+    	    margin:40px auto;
+            width:80%;
+            border-radius:10px;
+            box-shadow:0 2px 5px rgba(0,0,0,0.2);
+            text-align:center;
+	}
+
+	.about p {
+    	    margin-top:10px;
+            line-height:1.6;
+	}
+	.footer {
+    	    background:black;
+    	    color:white;
+    	    text-align:center;
+            padding:20px;
+            margin-top:30px;
+}
+
+.footer p {
+    margin:5px 0;
+    font-size:14px;
+}
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="brand">Ladia Jewellery 💎</div>
+    <div class="links">
+        <a href="#top">Home</a>
+        <a href="#productsSection">Products</a>
+	<a href="#reviewsSection">Reviews</a>
+    	<a href="#aboutSection">About</a>
+        <a href="cart.html">Cart </a>
+        <a href="#contactSection">Contact</a>
+    </div>
+</div>
+
+<div class="header" id="top">
+    <h1>✨ Welcome to Ladia Jewellery ✨</h1>
+   <p> Where Elegance Meets Craftsmanship </p>
+    <hr style="width:80px; border:2px solid gold; margin:10px auto;">
+    <p>Your dream jewellery, crafted to perfection</p>
+    <input type="text" id="searchBox" placeholder="Search products..." onkeyup="searchProducts()" style="padding:8px; width:200px; display:block; margin: 0 auto 20px auto;">
+</div>
+
+<div class="filter-section">
+    <label>Filter by Price:</label>
+    <select id="priceFilter" onchange="filterByPrice()">
+        <option value="all">All</option>
+        <option value="0-50000">Below ₹50000</option>
+        <option value="50000-100000">₹50000 - ₹100000</option>
+        <option value="100000-500000">Above ₹100000</option>
+    </select>
+</div>
+
+<p id="message"></p>
+
+<div class="products" id="productsSection">
+
+    <div class="card" data-price="50000">
+        <img src="https://images.unsplash.com/photo-1598560917807-1bae44bd2be8?w=600">
+        <h3>Gold Ring</h3>
+        <p>₹50000</p>
+        <button class="addCart" onclick="addToCart('Gold Ring', 50000, 'https://images.unsplash.com/photo-1598560917807-1bae44bd2be8?w=600')">Add to Cart</button>
+    </div>
+
+    <div class="card" data-price="300000">
+        <img src="https://www.tanishq.co.in/dw/image/v2/BKCK_PRD/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dw53a39d8b/images/hi-res/5150912ALABA00_1.jpg?sw=480&sh=480">
+        <h3>Necklace</h3>
+        <p>₹300000</p>
+        <button class="addCart" onclick="addToCart('Necklace', 300000, 'https://www.tanishq.co.in/dw/image/v2/BKCK_PRD/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dw53a39d8b/images/hi-res/5150912ALABA00_1.jpg?sw=480&sh=480')">Add to Cart</button>
+    </div>
+
+    <div class="card" data-price="150000">
+        <img src="https://m.media-amazon.com/images/I/71nq1WS+20L._AC_UY1100_.jpg">
+        <h3>Gold Bracelet</h3>
+        <p>₹150000</p>
+        <button class="addCart" onclick="addToCart('Gold Bracelet', 150000, 'https://m.media-amazon.com/images/I/71nq1WS+20L._AC_UY1100_.jpg')">Add to Cart</button>
+    </div>
+
+    <div class="card" data-price="50000">
+        <img src="https://www.chidambaramgoldcovering.com/image/cache/catalog/ChidambaramGoldCovering/earrings/er4496-latest-collections-forming-dangler-earring-shop-online-two-gram-gold-jewellery-1-425x500.jpg">
+        <h3>Gold Earrings</h3>
+        <p>₹50000</p>
+        <button class="addCart" onclick="addToCart('Gold Earrings', 50000, 'https://www.chidambaramgoldcovering.com/image/cache/catalog/ChidambaramGoldCovering/earrings/er4496-latest-collections-forming-dangler-earring-shop-online-two-gram-gold-jewellery-1-425x500.jpg')">Add to Cart</button>
+    </div>
+
+    <div class="card" data-price="5000">
+        <img src="https://shop.southindiajewels.com/wp-content/uploads/2024/05/Imitation-Silver-Plated-Gungroo-Anklet_2-scaled.jpg">
+        <h3>Silver Anklet</h3>
+        <p>₹5000</p>
+        <button class="addCart" onclick="addToCart('Silver Anklet', 5000, 'https://shop.southindiajewels.com/wp-content/uploads/2024/05/Imitation-Silver-Plated-Gungroo-Anklet_2-scaled.jpg')">Add to Cart</button>
+    </div>
+
+    <div class="card" data-price="100000">
+        <img src="https://cdn-media.glamira.com/media/product/newgeneration/view/1/sku/Queen-3crt/diamond/diamond-Brillant_AA/stone2/diamond-Brillant_AAA/alloycolour/yellow.jpg">
+        <h3>Diamond Ring</h3>
+        <p>₹100000</p>
+        <button class="addCart" onclick="addToCart('Diamond Ring', 100000, 'https://cdn-media.glamira.com/media/product/newgeneration/view/1/sku/Queen-3crt/diamond/diamond-Brillant_AA/stone2/diamond-Brillant_AAA/alloycolour/yellow.jpg')">Add to Cart</button>
+    </div>
+
+    <div class="card" data-price="30000">
+        <img src="https://shop.southindiajewels.com/wp-content/uploads/2024/08/Traditional-Ganesha-Pendant-Pearl-Necklace-with-Pink-Stones.jpg">
+        <h3>Pearl Necklace</h3>
+        <p>₹30000</p>
+        <button class="addCart" onclick="addToCart('Pearl Necklace', 30000, 'https://shop.southindiajewels.com/wp-content/uploads/2024/08/Traditional-Ganesha-Pendant-Pearl-Necklace-with-Pink-Stones.jpg')">Add to Cart</button>
+    </div>
+
+    <div class="card" data-price="400000">
+        <img src="https://www.kushals.com/cdn/shop/files/antique-necklace-ruby-green-gold-antique-necklace-168703-37886618468508.jpg">
+        <h3>Bridal Set</h3>
+        <p>₹400000</p>
+        <button class="addCart" onclick="addToCart('Bridal Set', 400000, 'https://www.kushals.com/cdn/shop/files/antique-necklace-ruby-green-gold-antique-necklace-168703-37886618468508.jpg')">Add to Cart</button>
+    </div>
+
+    <div class="card" data-price="200000">
+        <img src="https://img.tatacliq.com/images/i20//437Wx649H/MP000000021625975_437Wx649H_202410151244501.jpeg">
+        <h3>Gold Chain</h3>
+        <p>₹200000</p>
+        <button class="addCart" onclick="addToCart('Gold Chain', 200000, 'https://img.tatacliq.com/images/i20//437Wx649H/MP000000021625975_437Wx649H_202410151244501.jpeg')">Add to Cart</button>
+    </div>
+
+    <div class="card" data-price="350000">
+        <img src="https://www.griiham.in/cdn/shop/files/Gold-Plated-Studded-Set-of-2-bangles-Designer-Bangles-Griiham-2_4_2cd80f5c-1fc7-4e9e-9bf4-fdca60a1baf2.jpg">
+        <h3>Gold Bangles</h3>
+        <p>₹350000</p>
+        <button class="addCart" onclick="addToCart('Gold Bangles', 350000, 'https://www.griiham.in/cdn/shop/files/Gold-Plated-Studded-Set-of-2-bangles-Designer-Bangles-Griiham-2_4_2cd80f5c-1fc7-4e9e-9bf4-fdca60a1baf2.jpg')">Add to Cart</button>
+    </div>
+
+    <div class="card" data-price="25000">
+        <img src="https://www.lajoyajewelry.com/wp-content/uploads/2024/04/Stud.webp">
+        <h3>Stud Earrings</h3>
+        <p>₹25000</p>
+        <button class="addCart" onclick="addToCart('Stud Earrings', 25000, 'https://www.lajoyajewelry.com/wp-content/uploads/2024/04/Stud.webp')">Add to Cart</button>
+    </div>
+
+</div>
+
+<p style="text-align:center;">Explore more collections...</p>
+<div class="reviews" id="reviewsSection">
+    <h2>Customer Reviews ⭐</h2>
+
+    <div class="review-container">
+
+        <div class="review-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>"I bought a Gold Ring and it looks amazing. Great quality!"</p>
+            <h4>- Sravya</h4>
+        </div>
+
+        <div class="review-card">
+            <div class="stars">⭐⭐⭐⭐</div>
+            <p>"Necklace design is beautiful and elegant."</p>
+            <h4>- Rahul</h4>
+        </div>
+
+        <div class="review-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>"Loved the earrings. Delivery was quick!"</p>
+            <h4>- Sneha</h4>
+        </div>
+
+        <div class="review-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>"Bridal set is stunning. Perfect choice!"</p>
+            <h4>- Navya</h4>
+        </div>
+
+    </div>
+	<div class="about" id="aboutSection">
+    <h2>About Ladia Jewellery 💎</h2>
+    <p>
+        Ladia Jewellery has been a symbol of elegance and trust, offering beautifully crafted designs for every occasion.
+        Our collections are inspired by tradition and modern style, ensuring every piece tells a unique story.
+    </p>
+    <p>
+        We focus on quality craftsmanship, premium materials, and customer satisfaction.
+        Whether it's a wedding, celebration, or daily wear, Ladia Jewellery brings timeless beauty to your moments.
+    </p>
+</div>
+</div><div class="contact" id="contactSection">
+    <h2>Contact Us</h2>
+    <p>📍 Address: 123 Jewellery Street, Hyderabad, India</p>
+    <p>📞 Phone: +91 9876543210</p>
+    <p>✉️ Email: contact@ladiajewellery.com</p>
+</div>
+
+<script>
+function addToCart(name, price, image) {
+    let cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
+    cart.push({ name, price, image });
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+    document.getElementById("message").innerText = name + " added to cart!";
+    setTimeout(() => { document.getElementById("message").innerText = ""; }, 2000);
+}
+function searchProducts() {
+    let input = document.getElementById("searchBox").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+    let found = false;
+    cards.forEach(card => {
+        let productName = card.querySelector("h3").innerText.toLowerCase();
+        if(productName.includes(input)){
+            card.style.display = "block";
+            found = true;
+        } else {
+            card.style.display = "none";
+        }
+    });
+
+    let noResult = document.getElementById("noResult");
+    if(!noResult){
+        noResult = document.createElement("p");
+        noResult.id = "noResult";
+        noResult.style.textAlign = "center";
+        noResult.style.color = "red";
+        noResult.style.fontWeight = "bold";
+        noResult.style.marginTop = "20px";
+        document.querySelector(".products").after(noResult);
+    }
+    noResult.innerText = found ? "" : "Product not found!";
+}
+
+function filterByPrice() {
+    let filter = document.getElementById("priceFilter").value;
+    let cards = document.querySelectorAll(".card");
+    cards.forEach(card => {
+        let price = parseInt(card.getAttribute("data-price"));
+        if(filter === "all") card.style.display = "block";
+        else if(filter === "0-50000" && price <= 50000) card.style.display = "block";
+        else if(filter === "50000-100000" && price > 50000 && price <= 100000) card.style.display = "block";
+        else if(filter === "100000-500000" && price > 100000 ) card.style.display = "block";
+        else card.style.display = "none";
+    });
+}
+
+</script>
+	<div class="footer">
+    		<p>© 2026 Ladia Jewellery 💎</p>
+    		<p>Crafted with elegance | Trusted by customers</p>
+    		<p>Be a part of Ladia elegance ✨</p>
+</div>
+</body>
+</html>
